@@ -127,3 +127,4 @@ class Comments(db.Model):
         comment = Comments.query.order_by(
             Comments.date_posted.desc()).filter_by(pitches_id=id).all()
         return comment
+
