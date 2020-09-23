@@ -6,7 +6,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://patrick:201400@localhost/pitch'
     SECRET_KEY = '<Flask WTF Secret Key>'
 
-    UPLOADED_PHOTOS_DEST ='app/static/photos'
+    UPLOADED_PHOTOS_DEST = 'app/static/photos'
 
 
 
