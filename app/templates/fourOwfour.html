@@ -1,0 +1,31 @@
+
+{% extends 'base.html'%}
+
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/fourOwfour.css')}}">
+    <!-- <link rel="icon" href="static/images/favicon.ico"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="container">
+<div class="row" style="font-family: 'Courier Prime', monospace;">
+    <div class="col-md-12">
+        <div class="error-template">
+            <h1>
+                Oops!</h1>
+            <h2>
+                404 Not Found</h2>
+            <div class="error-details">
+                Sorry, an error has occured, Requested page not found!
+            </div>
+            <div class="error-actions">
+                <a href="/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>
+                    Take Me Home </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

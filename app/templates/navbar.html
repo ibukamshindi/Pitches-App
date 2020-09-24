@@ -1,4 +1,4 @@
-div class="navbar navbar-inverse" role="navigation"style="background-color:#1A5276;font-family: 'Chewy', cursive; font-size:25px">
+<div class="navbar navbar-inverse" role="navigation" style="background-color:#7f8a90;font-family: 'Chewy', cursive; font-size:25px">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle = "collapse" data-target = ".navbar-collapse">
@@ -7,7 +7,7 @@ div class="navbar navbar-inverse" role="navigation"style="background-color:#1A52
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-            <a class="navbar-brand" href="/" style="font-family: 'Bungee', cursive; font-size:50px"> PITCH </a>
+            <a class="navbar-brand" href="/" style="font-family: 'Courier Prime', monospace; color: black; font-size:50px"> PITCH </a>
 
     </div>
 
@@ -15,11 +15,11 @@ div class="navbar navbar-inverse" role="navigation"style="background-color:#1A52
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-right" id="mySidenav">
       {% if current_user.is_authenticated %}
-      <li style="font-size:20px;color:white" id="home"><a href="/">HOME</a></li>
+      <li style="font-size:20px; color:black" id="home"><a href="/">HOME</a></li>
       <li id="profile"><a href="{{url_for('main.profile',uname=current_user.username)}}">PROFILE</a></li>
       <li id="sign-out"><a href="{{url_for('auth.logout')}}">SIGN OUT</a></li>
       {% else %}
-      <li style="font-size:20px;color:white" id="home"><a href="/">HOME</a></li>
+      <li style="font-size:20px; color:black" id="home"><a href="/">HOME</a></li>
       <li id="sign-in"><a href="{{url_for('auth.login')}}">SIGN IN</a></li>
       {%endif%}
     </ul>

@@ -1,24 +1,26 @@
-{% extends 'base.html'%}
-{% import 'macros.html' as macro%}
+{% extends 'base.html'%} 
+{% import 'macros.html' as macro%} 
 
 {% block styles%}
     {{ super() }}
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Boogaloo|Bungee|Caveat+Brush|Russo+One" rel="stylesheet">
-    <link rel="icon" href="static/images/favicon.ico">
+    <link href=<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
+    <!-- <link rel="icon" href="static/images/favicon.ico"> -->
     <style>
-    @import url('https://fonts.googleapis.com/css?family=Bungee|Chewy|Roboto+Mono');
+    @import url('https://fonts.google.com/specimen/Courier+Prime?sidebar.open=true&selection.family=Courier+Prime:wght@700');
       #sidebar{
-        width: 250px;
+        width: 800px;
         height:100%;
-        background-color:#7DCEA0;
-        position:fixed;
+        background-color:#7dcea0;
+        position:absolute;
         overflow:auto;
         font-family: 'Bungee', cursive;
-
+        margin-left: 500px;
+       
       }
       #sidebar p{
-        margin-left: 20px;
+        margin-left: 50px;
+        margin-right: 50px;
         font-size: 25px;
       }
       #items{
@@ -52,14 +54,14 @@
   <p class="well">Select a Category Below</p>
     {{ macro.displayCategoryList(categories) }}
 </div>
-<div class="well" style="margin-left:20%; background-color:#1A5276">
+<!-- <div class="well" style="margin-left:20%; margin-right:10%; background-color:#1A5276">
   <div class="row">
-    <div class="col-md-4"><img src="static/images/flirting.jpg" alt=""></div>
-    <div class="col-md-4"><img src="app/static/images/humour.jpg" alt=""></div>
+    <div class="col-md-6"><img src="app/static/images/flirting.jpg" alt=""></div>
+    <div class="col-md-6"><img src="app/static/images/humour.jpg" alt=""></div>
   </div>
   <div class="row">
-    <div class="col-md-4"><img src="app/static/images/interview.jpg" alt=""></div>
-    <div class="col-md-4"><img src="app/static/images/salespitch.jpg" alt=""></div>
+    <div class="col-md-6"><img src="app/static/images/interview.jpg" alt=""></div>
+    <div class="col-md-6"><img src="app/static/images/salespitch.jpg" alt=""></div>
   </div>
-</div>
+</div> -->
 {% endblock %}

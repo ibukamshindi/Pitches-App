@@ -1,4 +1,5 @@
-% extends 'base.html' %} {% import 'macros.html' as macro%}
+{% extends 'base.html' %} 
+{% import 'macros.html' as macro%}
 
 <!-- content block -->
 {% block content %}
@@ -16,4 +17,3 @@
 
 {% endif %}
 <a class="btn btn-primary text-center text-danger" href="/category/pitch/new/{{category.id}}">Write a new Pitch</a>{% endblock %}
-
