@@ -17,6 +17,5 @@ At the moment there are no known issues.
 * The project made us of the Python-Flask, Postgressql and Heroku for online deployment.
 ## Support and contact details
 If you want to contact me reach me at 123@gmail.com
-## Link to live site:
 ## License [MIT license](https://opensource.org/licenses/MIT)
 ## (c) 2020 Ibukamshindi
