@@ -25,11 +25,11 @@ class ProdConfig(Config):
         Config: The parent configuration class with General configuration settings
     '''
 
-    SQLALCHEMY_DATABASE_URI=('postgresql+psycopg2://patrick:201400@localhost/pitch')
+    SQLALCHEMY_DATABASE_URI=('postgresql+psycopg2://patrick:201400@localhost/pitches')
     DEBUG = True
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI=('postgresql+psycopg2://patrick:201400@localhost/pitch')
+    SQLALCHEMY_DATABASE_URI=('postgresql+psycopg2://patrick:201400@localhost/pitches')
 
     DEBUG = True
 
