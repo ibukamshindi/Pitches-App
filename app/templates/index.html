@@ -1,7 +1,7 @@
-{% extends 'base.html'%} 
-{% import 'macros.html' as macro%} 
+{% extends 'base.html' %} 
+<!-- {% import 'macros.html' as macro %}  -->
 
-{% block styles%}
+{% block styles %}
     {{ super() }}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href=<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
@@ -50,9 +50,21 @@
     </style>
 {% endblock %}
 {% block content %}
-<div class="w3-sidebar w3-light-grey w3-bar-block" id="sidebar">
-  <p class="well">Select a Category Below</p>
-    {{ macro.displayCategoryList(categories) }}
+<!-- <div class="w3-sidebar w3-light-grey w3-bar-block" id="sidebar"> -->
+  <!-- <p class="well">Select a Category Below</p> -->
+  
+  {% for pitch in pitches[::-1]%}
+<div class="container">
+    <div class="panel bg-light text-center style="style="box-shadow: 5px 5px 5px 5px #CEEDEC; padding:10px;">
+        <p>"{{pitch.actual_pitch}}"</p>
+        <p class="subtext"> Posted: {{pitch.date_posted.strftime("%c")}}</p>
+        {{pitch.category_id}}
+        <!-- <a class= "btn btn-success btn-sm" style="background-color: #7F7EFF;">Upvote </a>
+        <a class= "btn btn-info btn-sm" style="background-color: #CC8B8C;">Downvote </a> -->
+    </div>
+</div>
+{% endfor %}
+    <!-- {{ macro.displayCategoryList(category_List) }} -->
 </div>
 <!-- <div class="well" style="margin-left:20%; margin-right:10%; background-color:#1A5276">
   <div class="row">

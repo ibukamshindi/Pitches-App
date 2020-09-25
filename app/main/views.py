@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, abort
 from . import main
 from flask_login import login_required, current_user
-from ..models import User, PitchCategory, Pitches, Comments
+from ..models import User, Pitches, Comments
 from .forms import UpdateProfile, PitchForm, CommentForm
 from .. import db, photos
 
@@ -13,65 +13,93 @@ def index():
     """
 
     title = 'Home- Welcome to the Pitch Website'
-    categories = PitchCategory.get_categories()
-    return render_template('index.html', title=title, categories=categories)
+    pitches = Pitches.get_all_pitches()
+    return render_template('index.html', title=title, pitches=pitches)
+
+@main.route('/promotions')
+def promotions():
+    '''
+    View promotions page function that returns the promotions page and its data
+    '''
+    pitches= Pitches.get_pitches_by_category(1)
+    title = 'Promotions'
+    return render_template('promotions.html', title = title, pitches = pitches)
+
+@main.route('/pickup_lines')
+def pickuplines():
+    '''
+    View pickuplines page function that returns the pickuplines page and its data
+    '''
+    pitches= Pitches.get_pitches_by_category(2)
+    title = 'Pickup_lines'
+    return render_template('pickup_lines.html', title = title, pitches = pitches)
+
+
+@main.route('/interview')
+def interview():
+    '''
+    View interview page function that returns the interviews page and its data
+    '''
+    pitches= Pitches.get_pitches_by_category(3)
+    title = 'Interview'
+    return render_template('interview.html', title = title, pitches = pitches)
 
 
 # Route for adding a new pitch
 
-@main.route('/category/pitch/new/<int:id>', methods=['GET', 'POST'])
-@login_required
-def new_pitch(id):
+@main.route('/new_pitch', methods=['GET', 'POST'])
+# @login_required
+def new_pitch():
     '''
     Function to check Pitches form
     '''
     form = PitchForm()
-    category = PitchCategory.query.filter_by(id=id).first()
+    # category = PitchCategory.query.filter_by(id=id).first()
 
-    if category is None:
-        abort(404)
+    # if category is None:
+    #     abort(404)
 
     if form.validate_on_submit():
-        actual_pitch = form.content.data
-        new_pitch = Pitches(actual_pitch=actual_pitch,
-                            user_id=current_user.id, category_id=category.id)
+        new_pitch = Pitches(category_id = form.category_id.data, actual_pitch = form.content.data)
+        # new_pitch = Pitches(actual_pitch=actual_pitch,
+        #                     category_id=category.id)
         new_pitch.save_pitch()
-        return redirect(url_for('.category', id=category.id))
+        return redirect(url_for('main.index'))
 
-    return render_template('new_pitch.html', pitch_form=form, category=category)
+    return render_template('new_pitch.html', pitch_form=form)
 
 # Routes for displaying the different pitches
 
 
-@main.route('/category/<int:id>')
-def category(id):
-    '''
-    category route function returns a list of pitches in the category chosen
-    '''
+# @main.route('/category/<int:id>')
+# def category(id):
+#     '''
+#     category route function returns a list of pitches in the category chosen
+#     '''
 
-    category = PitchCategory.query.get(id)
+#     category = PitchCategory.query.get(id)
 
-    if category is None:
-        abort(404)
+#     if category is None:
+#         abort(404)
 
-    pitches = Pitches.get_pitches(id)
-    return render_template('category.html', category=category, pitches=pitches)
+#     pitches = Pitches.get_pitches(id)
+#     return render_template('category.html', category=category, pitches=pitches)
 
 
-@main.route('/pitch/<int:id>', methods=['GET', 'POST'])
-@login_required
-def single_pitch(id):
-    '''
-    Function the returns a single pitch for comment to be added
-    '''
+# @main.route('/pitch/<int:id>', methods=['GET', 'POST'])
+# @login_required
+# def single_pitch(id):
+#     '''
+#     Function the returns a single pitch for comment to be added
+#     '''
 
-    pitches = Pitches.query.get(id)
+#     pitches = Pitches.query.get(id)
 
-    if pitches is None:
-        abort(404)
+#     if pitches is None:
+#         abort(404)
 
-    comment = Comments.get_comments(id)
-    return render_template('pitch.html', pitches=pitches, comment=comment)
+#     comment = Comments.get_comments(id)
+#     return render_template('pitch.html', pitches=pitches, comment=comment)
 
 
 # Routes for user authentication

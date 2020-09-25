@@ -39,42 +39,42 @@ class User(UserMixin, db.Model):
   def __repr__(self):
       return f'User {self.username}' 
 
-class PitchCategory(db.Model):
+# class PitchCategory(db.Model):
 
-  '''
-  Category class define category per pitch
-  '''
-  __tablename__ = 'pitch_categories'
+#   '''
+#   Category class define category per pitch
+#   '''
+#   __tablename__ = 'pitch_categories'
 
-    # table columns
-  id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(255))
-  description = db.Column(db.String(255))
+#     # table columns
+#   id = db.Column(db.Integer, primary_key=True)
+#   name = db.Column(db.String(255))
+#   description = db.Column(db.String(255))
 
 
-    # save pitches
-  def save_category(self):
+#     # save pitches
+#   def save_category(self):
     
-    '''
-    Function that saves a category
-    '''
+#     '''
+#     Function that saves a category
+#     '''
     
-    db.session.add(self)
-    db.session.commit()
+#     db.session.add(self)
+#     db.session.commit()
 
-  @classmethod
-  def get_categories(cls):
+#   @classmethod
+#   def get_categories(cls):
 
-    '''
-    Function that returns all the data from the categories after being queried
-    '''
-    categories = PitchCategory.query.all()
+#     '''
+#     Function that returns all the data from the categories after being queried
+#     '''
+#     categories = PitchCategory.query.all()
     
-    return categories
+#     return categories
 
 
 class Pitches(db.Model):
-  all_pitches = []
+  # all_pitches = []
   
   __tablename__ = 'pitches'
 
@@ -82,11 +82,10 @@ class Pitches(db.Model):
   actual_pitch = db.Column(db.String)
   date_posted = db.Column(db.DateTime, default=datetime.utcnow)
   user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-  category_id = db.Column(db.Integer, db.ForeignKey("pitch_categories.id"))
+  category_id = db.Column(db.Integer)
   comment = db.relationship("Comments", backref="pitches", lazy="dynamic")
 
   def save_pitch(self):
-
     '''
     Function to save a pitch
     '''
@@ -94,9 +93,15 @@ class Pitches(db.Model):
     db.session.commit()
     
   @classmethod
-  def clear_pitches(cls):
+  def get_all_pitches(cls):
+    return Pitches.query.all()
 
-      
+  @classmethod
+  def get_pitches_by_category(cls,category_id):
+    return Pitches.query.filter_by(category_id= category_id)
+    
+  @classmethod
+  def clear_pitches(cls):
     """
     Function which clears all the pitches in a particular category
     """
@@ -105,8 +110,7 @@ class Pitches(db.Model):
     # display pitches
   @classmethod
   def get_pitches(cls, id):
-    
-
+  
     """
     Function which gets a particular pitch when requested by date posted
     """
@@ -114,7 +118,6 @@ class Pitches(db.Model):
     return pitches
 
 class Comments(db.Model):
-
   '''
   Comment class that creates instances of Comments class that will be attached to a particular pitch
   '''
@@ -129,21 +132,17 @@ class Comments(db.Model):
   pitches_id = db.Column(db.Integer, db.ForeignKey("pitches.id"))
   
   def save_comment(self):
-    
     '''
     Save the comments per pitch
     '''
-
     db.session.add(self)
     db.session.commit()
     
   @classmethod
   def get_comments(self, id):
 
-
     comment = Comments.query.order_by(
     Comments.date_posted.desc()).filter_by(pitches_id=id).all()
     
-
     return comment
 

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+ {% block styles %}
+  {{ super() }}
+
+{% endblock %}
+
+{% block content %}
+{% for pitch in pitches[::-1]%}
+<div class="container">
+    <div class="panel bg-light text-center style="style="box-shadow: 5px 5px 5px 5px #CEEDEC; padding:10px;">
+        <p>"{{pitch.actual_pitch}}"</p>
+        <p class="subtext"> Posted: {{pitch.date_posted.strftime("%c")}}</p>
+        {{pitch.category_id}}
+    </div>
+</div>
+{% endfor %} 
+{% endblock %}
